@@ -1,13 +1,9 @@
-#Create 3 arrays of 3 elements
-#prompt user to choose x or o
-#prompt user to enter chose shape in one of nine 
+=begin Improvements to make:
+- Each turn doesn't need to be a method.
+- Add error message if you don't take your turn or if you put in a number for a square that's already been entered or more than 9
+=end
 
-# Game_array= [[1,2,3], "\n" [4,5,6],[7,8,9]]
-# https://codequizzes.wordpress.com/2013/10/25/creating-a-tic-tac-toe-game-with-ruby/
-# Have logic for win, lose, draw conditions
-
-#Improvements, each turn shouldn't be a method!
-
+# Class to collect each player's name, symbol, and turn order
 class Player 
   attr_accessor :name
   attr_accessor :symbol
@@ -34,6 +30,7 @@ class Player
 
 end
 
+# Board display via array
 def display_board(board)
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts "--------------"
@@ -44,23 +41,7 @@ end
 
 $board = ["1","2","3","4","5","6","7","8","9"]
 
-# def game_condition()
-#   if [board[0],board[1],board[2]].uniq.count == 1
-#       [board[3],board[4],board[5]].uniq.count == 1 ||
-#       [board[6],board[7],board[8]].uniq.count == 1 ||
-#       [board[0],board[4],board[8]].uniq.count == 1 ||
-#       [board[2],board[4],board[6]].uniq.count == 1 ||
-#       [board[0],board[3],board[6]].uniq.count == 1 ||
-#       [board[1],board[4],board[7]].uniq.count == 1 ||
-#       [board[2],board[5],board[8]].uniq.count == 1 
-#     condition = game_over
-#     puts "The game is over!" 
-#   else
-#     condition = neutral
-#   end
-# end
-
-
+# Lists winning conditions possible
 def game_condition()
 
   # condition (1= game over, 2 = tie)
@@ -151,9 +132,7 @@ def game_condition()
   end
 end
 
-
-
-
+# Changes board array to symbols
 def game_enter(symbol, square)
   case tac_toe
   when square = i, 
@@ -162,7 +141,7 @@ def game_enter(symbol, square)
   puts board
 end
 
-#Prompt for Player One
+#Prompt for Player One to update player class
 puts "Welcome to the game of tic-tac-toe! Player one, what is your name?"
 
 player_one = Player.new(" "," ")
@@ -177,7 +156,7 @@ $update_player_one_symbol = player_one.symbol.delete("\"")
 
 puts "You'll be playing as #{$update_player_one_name} and using the #{$update_player_one_symbol}!"
 
-#Prompt for Player Two
+#Prompt for Player Two to update player class
 puts "Player two, what is your name?"
 
 player_two.set_name = gets.chomp
@@ -190,24 +169,22 @@ $update_player_two_symbol = player_two.symbol.delete("\"")
 puts "You'll be playing as #{$update_player_two_name} and using the #{$update_player_two_symbol}!"
 
 #Game Starts
-
 puts "Now let the game begin!"
 
 display_board($board)
 
+#Randomly chooses turn order
 def random_start()
   if rand(1..2) == 1
     puts "#{$update_player_one_name} starts! What square would you like?" 
     player_one_first = gets.chomp
     update_player_one_first = (player_one_first.to_i - 1)
     $board[update_player_one_first] = $update_player_one_symbol
-    #$player_one.first_turn = 1     Need to figure out instance class variables 
   else rand(1..2) > 2
     puts "#{$update_player_two_name} starts! What square would you like?" 
     player_two_first = gets.chomp
     update_player_two_first = (player_two_first.to_i - 1)
     $board[update_player_two_first] = $update_player_two_symbol
-    #$player_two.first_turn = 1
   end
 end
 
@@ -391,19 +368,4 @@ end
 ninth_turn()
 
 game_condition()
-#12/9 Need to figure out how to prompt players
-#NEed to figoure out how to promplt players to put symbols in the game
 
-#Players name themselves and pick a shape
-# Ask 
-  
-#Updates, maybe include the ability for a player to change their name/symbol if incorrect? 
-
-# 12/14 Figure out how to include next folllowing steps
-# 12/14 Figure out game winning conditions (given which symbol occupies the game condition method
-
-# 12/19 This finally works. Quirks to improve:
-# 1. I repeat myself a lot. Reduce each turn method to just one turn method
-# 2. Reduce the amount of times I use the game_condition method (alternate between turns and game condition)
-# 3. Utilize classes better
-# 4. Add error message if you don't take your turn or if you put in a number for a square that's already been entered or more than 9
