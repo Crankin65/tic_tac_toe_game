@@ -64,84 +64,17 @@ end
 # Lists winning conditions possible
 def game_condition()
 
-  # condition (1= game over, 2 = tie)
-  if [$board[0],$board[1],$board[2]].uniq.count == 1
-    if $board[0] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
+  triples = diagonal + column + rows
+  triples.each do |current_diagonal|
+    if current_diagonal.uniq.size == 1
       $condition = 1 
-    elsif $board[0] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-
-  if [$board[3],$board[4],$board[5]].uniq.count == 1 
-    if $board[3] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[3] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-
-  if [$board[6],$board[7],$board[8]].uniq.count == 1
-    if $board[6] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[6] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-
-  if [$board[0],$board[4],$board[8]].uniq.count == 1
-    if $board[0] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[0] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end 
-
-  if [$board[2],$board[4],$board[6]].uniq.count == 1
-    if $board[2] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[2] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-
-  if [$board[0],$board[3],$board[6]].uniq.count == 1
-    if $board[0] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[0] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-
-  if [$board[1],$board[4],$board[7]].uniq.count == 1
-    if $board[1] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[1] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
-    end
-  end
-  
-  if [$board[2],$board[5],$board[8]].uniq.count == 1 
-    if $board[2] == $update_player_one_symbol
-      puts "#{$update_player_one_name} won the game!"
-      $condition = 1 
-    elsif $board[2] == $update_player_two_symbol
-      puts "#{$update_player_two_name} won the game!"
-      $condition = 1 
+      player_name = nil
+      if current_diagonal[0] == $update_player_one_symbol
+        player_name = $update_player_one_name
+      elsif current_diagonal[0] == $update_player_two_symbol
+        player_name = $update_player_two_name
+      end
+      puts "#{player_name} won the game!"
     end
   end
 
